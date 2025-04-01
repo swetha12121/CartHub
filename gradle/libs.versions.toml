@@ -6,13 +6,14 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.10.0"
+activityCompose = "1.10.1"
 mapsCompose = "2.15.0"
-navigation = "2.8.5"
-composeBom = "2025.01.00" # Latest stable Compose BOM version
+navigation = "2.8.9"
+composeBom = "2025.03.00" # Latest stable Compose BOM version
 material3 = "1.3.1"       # Latest stable Material3 version
-playServicesMaps = "19.0.0"
+playServicesMaps = "19.1.0"
 retrofit = "2.9.0"
+
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
@@ -22,6 +23,8 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 room-runtime = { module = "androidx.room:room-runtime", version = "2.6.1" }
 room-ktx = { module = "androidx.room:room-ktx", version = "2.6.1" }
 room-compiler = { module = "androidx.room:room-compiler", version = "2.6.1" }
+coil-compose = { module = "io.coil-kt:coil-compose", version = "2.4.0" }
+
 
 
 

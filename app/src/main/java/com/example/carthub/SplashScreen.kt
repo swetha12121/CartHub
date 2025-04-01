@@ -34,4 +34,6 @@ fun SplashScreen(navController: NavHostController) {
             popUpTo("splash") { inclusive = true } // Remove splash screen from the back stack
         }
     }
+
+
 }
