@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "685443882387",
+    "project_id": "carthub-f6710",
+    "storage_bucket": "carthub-f6710.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685443882387:android:cbb097132bb20a4c03dc66",
+        "android_client_info": {
+          "package_name": "com.example.carthub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABwBxn0hsLISwS7Zl6S7vBnDpRm2I95QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun RoleSelectionScreen(context: Context, onRoleSelected: (String) -> Unit) {
     val gradientBrush = Brush.verticalGradient(
-        colors = listOf(Color(0xFF805616), Color(0xFF565E2B), Color(0xFF5E1320))
+        colors = listOf(Color(0xFF13717A), Color(0xFF462B5E), Color(0xFF5E1334))
     )
 
     Box(
@@ -73,11 +73,10 @@ fun RoleOptionCard(role: String, iconRes: Int, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(90.dp)
+            .height(100.dp)
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f)),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(6.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
