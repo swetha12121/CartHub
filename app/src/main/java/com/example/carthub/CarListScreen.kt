@@ -1,6 +1,6 @@
 package com.example.carthub
 
-import androidx.compose.foundation.Image
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,12 +11,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.carthub.Seller.isUserBuyer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CarListScreen(navController: NavController, cartItems: MutableState<List<Car>>) {
+    val context = LocalContext.current
+
+    // 🔐 Restrict sellers from viewing car list
+    if (!isUserBuyer(context)) {
+        LaunchedEffect(Unit) {
+            Toast.makeText(context, "Sellers cannot access this page", Toast.LENGTH_SHORT).show()
+            navController.popBackStack()
+        }
+        return
+    }
+
     var searchQuery by remember { mutableStateOf("") }
     val cars = CarRepository.getCars().filter { it.name.contains(searchQuery, ignoreCase = true) }
 
@@ -27,10 +40,10 @@ fun CarListScreen(navController: NavController, cartItems: MutableState<List<Car
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF8D1414), // Deep Black
-                            Color(0xFF12123D), // Charcoal
-                            Color(0xFF212175), // Slate Gray
-                            Color(0xFF483110)  // Gunmetal
+                            Color(0xFF8D1414),
+                            Color(0xFF12123D),
+                            Color(0xFF212175),
+                            Color(0xFF483110)
                         )
                     )
                 )
@@ -91,8 +104,14 @@ fun CarListScreen(navController: NavController, cartItems: MutableState<List<Car
 }
 
 @Composable
-fun CarItem(car: Car, navController: NavController, cartItems: MutableState<List<Car>>, onAddToCart: () -> Unit) {
+fun CarItem(
+    car: Car,
+    navController: NavController,
+    cartItems: MutableState<List<Car>>,
+    onAddToCart: () -> Unit
+) {
     val isInCart = cartItems.value.any { it.id == car.id }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,7 +128,10 @@ fun CarItem(car: Car, navController: NavController, cartItems: MutableState<List
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                 }
-                Button(onClick = { navController.navigate("car_details/${car.id}") }, modifier = Modifier.weight(1f)) {
+                Button(
+                    onClick = { navController.navigate("car_details/${car.id}") },
+                    modifier = Modifier.weight(1f)
+                ) {
                     Text("View Details")
                 }
             }
