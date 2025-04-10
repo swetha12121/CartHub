@@ -15,11 +15,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.carthub.Seller.navigateIfBuyer
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(navController: NavController, userViewModel: UserViewModel, userId: Int, cartItems: MutableState<List<Car>>) {
+fun HomePage(navController: NavController, userViewModel: UserViewModel, userId: Int?, cartItems: MutableState<List<Car>>) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -70,21 +71,23 @@ fun HomePage(navController: NavController, userViewModel: UserViewModel, userId:
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+
                         Button(
-                            onClick = { navController.navigate("car_list") },
+                            onClick = { navigateIfBuyer(context, navController, "car_list") },
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text("Browse Cars")
                         }
 
                         Button(
-                            onClick = { navController.navigate("cart") },
+                            onClick = { navigateIfBuyer(context, navController, "cart") },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 8.dp)
                         ) {
                             Text("Go to Cart (${cartItems.value.size})")
                         }
+
                     }
                 }
             )
