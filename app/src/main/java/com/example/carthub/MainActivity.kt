@@ -24,11 +24,12 @@ class MainActivity : ComponentActivity() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val startDestination = when {
-            userRole == null -> "roleSelection" // First-time user
-            userRole == "seller" && firebaseUser == null -> "sellerLogin" // Seller not logged in via Firebase
-            userRole == "buyer" && (!isLoggedIn || userId == -1) -> "login" // Buyer not logged in via Room
-            else -> "home/$userRole" // Logged in (either buyer or seller)
+            userRole == null -> "roleSelection"  // First time
+            !isLoggedIn && userRole == "seller" -> "sellerLogin"
+            !isLoggedIn && userRole == "buyer" -> "login"
+            else -> "home/$userRole"
         }
+
 
 
         // Setup Room DB

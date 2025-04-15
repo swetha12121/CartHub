@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,16 +25,18 @@ fun NavGraph(
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable("roleSelection") {
-            RoleSelectionScreen(context = context) { selectedRole ->
-                val sharedPref = context.getSharedPreferences("CarHubPrefs", Context.MODE_PRIVATE)
-                with(sharedPref.edit()) {
-                    putString("userRole", selectedRole)
-                    apply()
+            RoleSelectionScreen(
+                context = LocalContext.current,
+                onRoleSelected = { role ->
+                    val sharedPref = context.getSharedPreferences("CarHubPrefs", Context.MODE_PRIVATE)
+                    sharedPref.edit().putString("userRole", role).apply()
+
+                    when (role) {
+                        "buyer" -> navController.navigate("register")
+                        "seller" -> navController.navigate("sellerRegister")
+                    }
                 }
-                navController.navigate("home/$selectedRole") {
-                    popUpTo("roleSelection") { inclusive = true }
-                }
-            }
+            )
         }
 
         composable("login") { LoginPage(navController, userViewModel) }
@@ -72,7 +75,7 @@ fun NavGraph(
         }
 
         composable("sellerRegister") {
-            SellerRegistrationPage(navController)
+            SellerRegistrationPage(navController) // or whatever your composable is
         }
 
         composable("payment") {
@@ -88,7 +91,7 @@ fun NavGraph(
         }
 
         composable("logout") {
-            LogoutPage(navController, userViewModel)
+            LogoutPage(navController)
         }
 
         composable("car_details/{carId}") { backStackEntry ->
