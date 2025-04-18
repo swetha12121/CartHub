@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.carthub.Seller.navigateIfBuyer
+import com.example.carthub.utils.RoleUtils.navigateIfBuyer
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

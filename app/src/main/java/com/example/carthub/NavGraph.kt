@@ -12,7 +12,7 @@ import androidx.navigation.compose.composable
 import com.example.carthub.Seller.SellerHomePage
 import com.example.carthub.Seller.SellerLoginPage
 import com.example.carthub.Seller.SellerRegistrationPage
-import com.example.carthub.Seller.isUserBuyer
+import com.example.carthub.utils.RoleUtils.isUserBuyer
 
 @Composable
 fun NavGraph(

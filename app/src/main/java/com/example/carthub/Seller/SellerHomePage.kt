@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.carthub.utils.RoleUtils
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,7 +26,7 @@ fun SellerHomePage(navController: NavController) {
     val context = LocalContext.current
 
     // Check if the role is valid
-    val isSeller = SellerUtils.isUserSeller(context)
+    val isSeller = RoleUtils.isUserSeller(context)
     if (!isSeller) {
         Toast.makeText(context, "Access restricted to sellers only", Toast.LENGTH_SHORT).show()
         LaunchedEffect(Unit) {

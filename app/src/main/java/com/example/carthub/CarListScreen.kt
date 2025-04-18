@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.carthub.Seller.isUserBuyer
+import com.example.carthub.utils.RoleUtils
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,7 +22,7 @@ fun CarListScreen(navController: NavController, cartItems: MutableState<List<Car
     val context = LocalContext.current
 
     // 🔐 Restrict sellers from viewing car list
-    if (!isUserBuyer(context)) {
+    if (!RoleUtils.isUserBuyer(context)) {
         LaunchedEffect(Unit) {
             Toast.makeText(context, "Sellers cannot access this page", Toast.LENGTH_SHORT).show()
             navController.popBackStack()
